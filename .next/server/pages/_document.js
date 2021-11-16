@@ -12,7 +12,6 @@ exports.modules = {
 Object.defineProperty(exports, "__esModule", ({
     value: true
 }));
-exports.isEqualNode = isEqualNode;
 exports["default"] = initHeadManager;
 exports.DOMAttributeNames = void 0;
 const DOMAttributeNames = {
@@ -45,27 +44,13 @@ function reactElementToDOM({ type , props  }) {
     }
     return el;
 }
-function isEqualNode(oldTag, newTag) {
-    if (oldTag instanceof HTMLElement && newTag instanceof HTMLElement) {
-        const nonce = newTag.getAttribute('nonce');
-        // Only strip the nonce if `oldTag` has had it stripped. An element's nonce attribute will not
-        // be stripped if there is no content security policy response header that includes a nonce.
-        if (nonce && !oldTag.getAttribute('nonce')) {
-            const cloneTag = newTag.cloneNode(true);
-            cloneTag.setAttribute('nonce', '');
-            cloneTag.nonce = nonce;
-            return nonce === oldTag.nonce && oldTag.isEqualNode(cloneTag);
-        }
-    }
-    return oldTag.isEqualNode(newTag);
-}
 function updateElements(type, components) {
     const headEl = document.getElementsByTagName('head')[0];
     const headCountEl = headEl.querySelector('meta[name=next-head-count]');
     if (false) {}
     const headCount = Number(headCountEl.content);
     const oldTags = [];
-    for(let i = 0, j = headCountEl.previousElementSibling; i < headCount; i++, j = (j === null || j === void 0 ? void 0 : j.previousElementSibling) || null){
+    for(let i = 0, j = headCountEl.previousElementSibling; i < headCount; i++, j = j.previousElementSibling){
         var ref;
         if ((j === null || j === void 0 ? void 0 : (ref = j.tagName) === null || ref === void 0 ? void 0 : ref.toLowerCase()) === type) {
             oldTags.push(j);
@@ -74,17 +59,15 @@ function updateElements(type, components) {
     const newTags = components.map(reactElementToDOM).filter((newTag)=>{
         for(let k = 0, len = oldTags.length; k < len; k++){
             const oldTag = oldTags[k];
-            if (isEqualNode(oldTag, newTag)) {
+            if (oldTag.isEqualNode(newTag)) {
                 oldTags.splice(k, 1);
                 return false;
             }
         }
         return true;
     });
-    oldTags.forEach((t)=>{
-        var ref;
-        return (ref = t.parentNode) === null || ref === void 0 ? void 0 : ref.removeChild(t);
-    });
+    oldTags.forEach((t)=>t.parentNode.removeChild(t)
+    );
     newTags.forEach((t)=>headEl.insertBefore(t, headCountEl)
     );
     headCountEl.content = (headCount - oldTags.length + newTags.length).toString();
@@ -553,7 +536,7 @@ function Html(props) {
     }, props, {
         lang: props.lang || locale || undefined,
         amp: inAmpMode ? '' : undefined,
-        "data-ampdevmode": inAmpMode && "production" !== 'production' ? 0 : undefined
+        "data-ampdevmode": inAmpMode && 'production' !== 'production' ? 0 : undefined
     })));
 }
 function AmpStyles({ styles  }) {
@@ -685,11 +668,11 @@ class Head extends _react.Component {
     getPolyfillScripts() {
         return getPolyfillScripts(this.context, this.props);
     }
-    handleDocumentScriptLoaderItems(children1) {
+    handleDocumentScriptLoaderItems(children) {
         const { scriptLoader  } = this.context;
         const scriptLoaderItems = [];
         const filteredChildren = [];
-        _react.default.Children.forEach(children1, (child)=>{
+        _react.default.Children.forEach(children, (child)=>{
             if (child.type === _script.default) {
                 if (child.props.strategy === 'beforeInteractive') {
                     scriptLoader.beforeInteractive = (scriptLoader.beforeInteractive || []).concat([
@@ -810,7 +793,7 @@ class Head extends _react.Component {
             });
             var _nonce, _nonce1;
             return(/*#__PURE__*/ _react.default.createElement("head", Object.assign({
-            }, this.props),  true && this.context.isDevelopment && /*#__PURE__*/ _react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/ _react.default.createElement("style", {
+            }, this.props), this.context.isDevelopment && /*#__PURE__*/ _react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/ _react.default.createElement("style", {
                 "data-next-hide-fouc": true,
                 "data-ampdevmode": inAmpMode ? 'true' : undefined,
                 dangerouslySetInnerHTML: {
@@ -867,14 +850,13 @@ class Head extends _react.Component {
 }
 exports.Head = Head;
 Head.contextType = _utils.HtmlContext;
-function Main({ children  }) {
-    const { inAmpMode , docComponentsRendered , useMainContent  } = (0, _react).useContext(_utils.HtmlContext);
-    const content = useMainContent(children);
+function Main() {
+    const { inAmpMode , docComponentsRendered  } = (0, _react).useContext(_utils.HtmlContext);
     docComponentsRendered.Main = true;
-    if (inAmpMode) return content;
+    if (inAmpMode) return(/*#__PURE__*/ _react.default.createElement(_react.default.Fragment, null, _constants.BODY_RENDER_TARGET));
     return(/*#__PURE__*/ _react.default.createElement("div", {
         id: "__next"
-    }, content));
+    }, _constants.BODY_RENDER_TARGET));
 }
 class NextScript extends _react.Component {
     getDynamicChunks(files4) {
@@ -951,7 +933,7 @@ class NextScript extends _react.Component {
                     }
                 }), disableOptimizedLoading && !disableRuntimeJS && this.getPolyfillScripts(), disableOptimizedLoading && !disableRuntimeJS && this.getPreNextScripts(), disableOptimizedLoading && !disableRuntimeJS && this.getDynamicChunks(files), disableOptimizedLoading && !disableRuntimeJS && this.getScripts(files)));
             });
-            if (inAmpMode && "production" === 'production') {
+            if (inAmpMode && 'production' === 'production') {
                 return null;
             }
             return content;
