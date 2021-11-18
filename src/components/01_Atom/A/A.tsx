@@ -3,6 +3,40 @@ import { css } from "@emotion/react";
 import Link from "next/link";
 import theme from "src/styles/theme";
 
+interface IaProps {
+  type?: "solid" | "ghost" | "light" | "outline" | "text" | "danger";
+  size?: "sm" | "md" | "lg";
+  round?: "0" | "5" | "10";
+  flex?: boolean;
+  children?: React.ReactNode;
+  href?: string;
+}
+
+const A = ({
+  type = "solid",
+  size = "md",
+  round = "10",
+  flex = false,
+  children = "버튼",
+  href = "https://",
+}: IaProps) => {
+  return (
+    <Link href={href}>
+      <a
+        css={aStyle}
+        className={[
+          `type-${type}`,
+          `size-${size}`,
+          `round-${round}`,
+          flex && "flex",
+        ].join(" ")}
+      >
+        {children}
+      </a>
+    </Link>
+  );
+};
+
 const aStyle = css`
   font-weight: 600;
   font-size: 1.6rem;
@@ -70,39 +104,5 @@ const aStyle = css`
     width: 100%;
   }
 `;
-
-interface IaProps {
-  type?: "solid" | "ghost" | "light" | "outline" | "text" | "danger";
-  size?: "sm" | "md" | "lg";
-  round?: "0" | "5" | "10";
-  flex?: boolean;
-  children?: React.ReactNode;
-  href?: string;
-}
-
-const A = ({
-  type = "solid",
-  size = "md",
-  round = "10",
-  flex = false,
-  children = "버튼",
-  href = "https://",
-}: IaProps) => {
-  return (
-    <Link href={href}>
-      <a
-        css={aStyle}
-        className={[
-          `type-${type}`,
-          `size-${size}`,
-          `round-${round}`,
-          flex && "flex",
-        ].join(" ")}
-      >
-        {children}
-      </a>
-    </Link>
-  );
-};
 
 export default A;
