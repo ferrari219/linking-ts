@@ -1,6 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react";
 import theme from "src/styles/theme";
+import Icon from "../Icon";
 
 interface IbuttonProps {
   type?: "solid" | "ghost" | "light" | "outline" | "text" | "danger";
@@ -31,6 +32,7 @@ const Button = ({
       ].join(" ")}
       onClick={onClick}
     >
+      <Icon icon="IcoBell" />
       {children}
     </button>
   );
