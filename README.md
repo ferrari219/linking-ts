@@ -33,7 +33,7 @@
 
 ## Pages
 
-- [x] Home: 메인화면
+- [x] Main: 메인화면
 - [x] Detail: 클래스 상세화면
 - [x] Calendar: 달력 일정 보기
 
