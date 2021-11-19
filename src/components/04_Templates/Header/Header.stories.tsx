@@ -9,4 +9,8 @@ export default {
 const Template: ComponentStory<typeof Header> = (args) => <Header {...args} />;
 
 export const Overview = Template.bind({});
-Overview.args = {};
+Overview.args = {
+  left: "left",
+  mid: "mid",
+  right: "right",
+};
