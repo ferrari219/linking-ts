@@ -99,3 +99,16 @@ const Globals = () => {
 };
 
 export default Globals;
+
+// Sr-only: 스크린 리더만 읽게 처리
+export const SrOnly = css`
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  position: absolute;
+`;
+// Inherit: width, height 상속
+export const Inherit = css`
+  width: inherit;
+  height: inherit;
+`;
