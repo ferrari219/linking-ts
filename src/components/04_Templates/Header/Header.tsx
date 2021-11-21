@@ -25,20 +25,20 @@ const headerStyle = css`
   flex-flow: row wrap;
   align-items: center;
   width: 100%;
-
+  padding: 2rem 1rem;
   .left {
     display: flex;
     justify-content: flex-start;
     flex: 0 0 10rem;
     /* width: 5rem; */
-    background-color: red;
+    // background-color: red;
   }
   .right {
     flex: 0 0 10rem;
     display: flex;
     justify-content: flex-end;
     /* width: 5rem; */
-    background-color: red;
+    // background-color: red;
   }
   .mid {
     flex: 1;
