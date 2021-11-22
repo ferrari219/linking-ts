@@ -6,7 +6,7 @@ export default {
   component: Menu,
 } as ComponentMeta<typeof Menu>;
 
-const Template: ComponentStory<typeof Menu> = (args) => <Menu {...args} />;
+const Template: ComponentStory<typeof Menu> = (args) => <Menu />; //{...args}
 
 export const Overview = Template.bind({});
 Overview.args = {};

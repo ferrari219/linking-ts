@@ -6,7 +6,7 @@ export default {
   component: Slick,
 } as ComponentMeta<typeof Slick>;
 
-const Template: ComponentStory<typeof Slick> = (args) => <Slick {...args} />;
+const Template: ComponentStory<typeof Slick> = (args) => <Slick />; //{...args}
 
 export const Overview = Template.bind({});
 Overview.args = {};

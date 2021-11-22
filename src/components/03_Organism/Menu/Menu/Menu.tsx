@@ -1,6 +1,16 @@
 import MenuLi from "src/components/01_Atom/MenuLi";
 import MenuUl from "src/components/02_Molecules/MenuUl";
 
+// interface ImenuProps {}
+
+const Menu = () => {
+  return (
+    <MenuUl>
+      {data && data.map((item) => <MenuLi key={item.id} name={item.name} />)}
+    </MenuUl>
+  );
+};
+
 const data = [
   {
     id: 0,
@@ -43,13 +53,5 @@ const data = [
     lnk: "https://",
   },
 ];
-
-const Menu = () => {
-  return (
-    <MenuUl>
-      {data && data.map((item) => <MenuLi key={item.id} name={item.name} />)}
-    </MenuUl>
-  );
-};
 
 export default Menu;
