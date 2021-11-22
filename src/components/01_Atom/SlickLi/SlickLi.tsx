@@ -1,8 +1,9 @@
 import Link from "next/link";
+import Image from "next/image";
 
 interface IslickliProps {
   id?: number;
-  img: string;
+  img: string | StaticImageData;
   alt?: string;
   lnk?: string;
 }
@@ -12,7 +13,7 @@ const SlickLi = ({ id, img, alt, lnk = "https://" }: IslickliProps) => {
     <li>
       <Link href={lnk}>
         <a>
-          <div>banner</div>
+          <Image src={img} alt={alt} />
         </a>
       </Link>
     </li>

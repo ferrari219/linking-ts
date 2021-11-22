@@ -9,7 +9,11 @@ interface IslickulProps {
 }
 
 const SlickUl = ({ children }: IslickulProps) => {
-  return <Slider {...settings}>{children}</Slider>;
+  return (
+    <Slider {...settings} css={slickulStyle}>
+      {children}
+    </Slider>
+  );
 };
 
 const settings = {
@@ -19,5 +23,9 @@ const settings = {
   slidesToShow: 1,
   slidesToScroll: 1,
 };
+
+const slickulStyle = css`
+  list-style: none;
+`;
 
 export default SlickUl;
