@@ -3,7 +3,7 @@ import IconButton from "src/components/02_Molecules/IconButton";
 import Image from "next/image";
 import ImgLogo from "src/assets/img/logo.png";
 import Heads from "src/components/99_Etc/Heads";
-import Menu from "src/components/03_Organism/Menu/Menu/Menu";
+import Menu from "src/components/03_Organism/Menu";
 import Slick from "src/components/03_Organism/Slick";
 
 const MainPresenter = () => {
